@@ -35,8 +35,8 @@ export default {
   data () {
     return {
       loginForm: {
-        mobile: '', // 手机号
-        code: '', // 验证码
+        mobile: '13911111111', // 手机号
+        code: '246810', // 验证码
         check: false // 是否勾选，同意被坑
       },
       loginRules: {
@@ -66,10 +66,24 @@ export default {
   methods: {
     submitLogin () {
     // 手动校验
-      this.$refs.myForm.validate(function (isOK) {
+      this.$refs.myForm.validate((isOK) => {
         if (isOK) {
           // 说明校验通过   应该用登录接口
-          console.log('校验通过，应该开始调用登录接口')
+          // console.log('校验通过，应该开始调用登录接口')
+          // axios   body 参数  get 参数地址参数  路由参数  查询参数
+          // body  参数  axios  data
+          // get   参数   axious params
+          console.log(this.loginForm)
+          this.$axios({
+            url: '/authorizations', // 请求地址 axios 没有指定 类型 默认是走get 类型
+            method: 'post', // 类型
+            data: this.loginForm // body  参数
+          }).then(result => {
+            // 直接受正确结果
+            console.log(result)
+          }).catch(() => {
+
+          })
         }
       })
     }
