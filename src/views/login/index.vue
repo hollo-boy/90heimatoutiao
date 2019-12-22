@@ -7,7 +7,7 @@
       <img src="../../assets/img/logo_index.png" alt="">
     </div>
     <!-- 放置表单 el-form model 绑定数据对象-->
-    <el-form :model="loginForm" :rules="loginRules">
+    <el-form ref="myForm" :model="loginForm" :rules="loginRules">
       <!-- 表单里面  里面 prop要写要检验的字段名  放置 input/select/checkbox  相当于一行 -->
       <el-form-item prop="mobile">
         <el-input v-model="loginForm.mobile" placeholder="请输入手机号">
@@ -23,7 +23,7 @@
        <el-checkbox v-model="loginForm.check">我已阅读并同意用户协议和隐私条款</el-checkbox>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" style="width:100%">登录</el-button>
+        <el-button @click="submitLogin"  type="primary" style="width:100%">登录</el-button>
       </el-form-item>
     </el-form>
     </el-card>
@@ -62,8 +62,20 @@ export default {
         } }]
       }
     }
+  },
+  methods: {
+    submitLogin () {
+    // 手动校验
+      this.$refs.myForm.validate(function (isOK) {
+        if (isOK) {
+          // 说明校验通过   应该用登录接口
+          console.log('校验通过，应该开始调用登录接口')
+        }
+      })
+    }
   }
 }
+
 </script>
 
 <style lang='less' scoped>
