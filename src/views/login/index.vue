@@ -82,9 +82,13 @@ export default {
             // 直接受正确结果
             // 前端缓存
             window.localStorage.setItem('user-token', result.data.data.token)
-            console.log(result)
+            this.$router.push('/') // 跳转到home
           }).catch(() => {
+            this.$message({
+              type: 'warning',
+              message: '手机号或者验证码错误！'
 
+            })
           })
         }
       })
