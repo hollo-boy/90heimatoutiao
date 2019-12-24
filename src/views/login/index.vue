@@ -80,6 +80,8 @@ export default {
             data: this.loginForm // body  参数
           }).then(result => {
             // 直接受正确结果
+            // 前端缓存
+            window.localStorage.setItem('user-token', result.data.data.token)
             console.log(result)
           }).catch(() => {
 
